@@ -1,5 +1,3 @@
-// сделать простой проводник файлов чтобы можно было смотреть папки файлы на java swing не использовать JFileSelector
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -50,7 +48,6 @@ public class FileExplorer extends JFrame{
         upButton.addActionListener(e -> goUp());
         add(upButton, BorderLayout.NORTH);
 
-        // Горячая клавиша: ⌘+↑ (macOS), Alt+↑ (Windows/Linux)
         int menuMask = getPlatformMenuMask();
         KeyStroke upShortcut = KeyStroke.getKeyStroke(KeyEvent.VK_UP, menuMask);
         getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(upShortcut, "goUp");
@@ -101,7 +98,6 @@ public class FileExplorer extends JFrame{
         });
 
         for (File f : files) {
-            // Пропускаем скрытые: .name на Unix/macOS и isHidden() везде
             if (f.isHidden() || isUnixHidden(f)) continue;
             listModel.addElement(f);
         }
@@ -138,9 +134,9 @@ public class FileExplorer extends JFrame{
     private static int getPlatformMenuMask() {
         String os = System.getProperty("os.name").toLowerCase();
         if (os.contains("mac")) {
-            return KeyEvent.META_DOWN_MASK; // ⌘
+            return KeyEvent.META_DOWN_MASK;
         } else {
-            return KeyEvent.ALT_DOWN_MASK;  // Alt
+            return KeyEvent.ALT_DOWN_MASK;
         }
     }
 
